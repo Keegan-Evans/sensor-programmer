@@ -1,0 +1,10 @@
+# should python dependencies be setup here or with setuptools?
+name: sensor_configurator
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python>=3.10.*
+  - click
+  - setuptools
+  - ansible-runner

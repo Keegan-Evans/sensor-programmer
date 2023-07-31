@@ -1,0 +1,7 @@
+/env/*
+configs.py
+settings.json
+*.pyc
+*.egg-info
+firmware_creator/*
+.DS_Store
