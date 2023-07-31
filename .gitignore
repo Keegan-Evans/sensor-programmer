@@ -5,3 +5,4 @@ settings.json
 *.egg-info
 firmware_creator/*
 .DS_Store
+manifest.py
