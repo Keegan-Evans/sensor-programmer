@@ -12,8 +12,8 @@ def configure_sensor():
 @click.option('--sensor_id', help='The id to be give to the pico this firwmare is to be flashed to. You should create a unique one for each pico to be connected to the system.')
 @click.option('--hub_ip',
               default = get_ip_address('en0'),
-              help='ip address of mqtt broker, this should be collected '
-              'directly from the sensor hub raspberry pi itself')
+              help='ip address of mqtt broker, generally this will be collected '
+              'directly and automatically from the sensor hub raspberry pi itself')
 def create_sensor_config_file(sensor_id, hub_ip):
     if sensor_id is None:
         sensor_id = click.prompt('Sensor-ID')
@@ -30,6 +30,11 @@ def create_sensor_config_file(sensor_id, hub_ip):
 @click.option('--sensors', help='A list of Sensor Libraries to be included in the compiled firmware.')
 def create_sensor_package(sensors: iter):
     """Takes a list of sensor modules to be written into the board firmware and then adds them to the manifest to be used to create the firmware"""
+    if sensors is None:
+        click.echo("Which of the following sensor modules would you like to include on this device?\n")
+        for sensor in enumerated_sensor_library:
+            click.echo("{}".format(sensor))
+        click.prompt(":")
     sensors = sensors.split(",")
     with open("./manifest.py", 'w') as fh:
         # start by including the default manifest for board so pre-existing port libraries are included
